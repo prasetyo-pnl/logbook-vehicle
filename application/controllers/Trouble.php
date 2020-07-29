@@ -31,80 +31,51 @@ class Trouble extends CI_Controller
         $this->load->view('trouble_tambah', $data);
     }
 
-    // public function delete($id = null)
-    // {
-    //     $this->vehicle->delete($id);
-    //     redirect('vehicle');
-    // }
+    public function delete($id = null)
+    {
+        $this->trouble->delete($id);
+        redirect('trouble');
+    }
 
-    // public function edit($id = null)
-    // {
-    //     $query = $this->vehicle->get($id);
-    //     $plant = $this->vehicle->getPlant();
-    //     $data = array(
-    //         'header' => 'Edit Data Vehicle',
-    //         'plant' => $plant->result(),
-    //         'vehicle' => $query->row()
+    public function edit($id = null)
+    {
+        $query = $this->trouble->get($id);
+        $data = array(
+            'header' => 'Edit Data Trouble',
+            'trouble' => $query->row(),
+        );
+        $this->load->view('trouble_edit', $data);
+    }
 
-    //     );
-    //     $this->load->view('vehicle_edit', $data);
-    // }
+    public function proses()
+    {
+        $dateentry = $this->input->post('dateentry');
+        $datefinish = $this->input->post('datefinish');
+        $harientry = date("d", strtotime($dateentry));
+        $harifinish = date("d", strtotime($datefinish));
+        $jamentry = date("H", strtotime($dateentry));
+        $jamfinish = date("H", strtotime($datefinish));
+        $stoptime =((($harifinish - $harientry)* 24) - $jamentry) + $jamfinish;
 
-    // public function proses()
-    // {
-    //     if (isset($_POST['add'])) {
-    //         $inputan = $this->input->post(null, true);
+        $pow = implode(";", $this->input->post('pow'));
+        $desc = implode(";", $this->input->post('description'));
+        $count = implode(";", $this->input->post('countermeasure'));
+        $spare = implode(";", $this->input->post('sparepart'));
 
-    //         $config['upload_path']   = './uploads/files';
-    //         $config['allowed_types'] = 'jpg|png|jpeg';
-    //         $config['max_size']      = 2048;
-    //         $config['file_name']     = $this->input->post('tagsign');
-    //         $this->load->library('upload', $config);
-
-    //         if (@$_FILES['foto']['name'] != null) {
-    //             if ($this->upload->do_upload('foto')) {
-    //                 $inputan['foto'] = $this->upload->data('file_name');
-    //                 $this->vehicle->add($inputan);
-
-    //                 redirect('vehicle');
-    //             } else {
-
-    //                 redirect('vehicle/add');
-    //             }
-    //         } else {
-    //             $inputan['foto'] = null;
-    //             $this->vehicle->add($inputan);
-
-    //             redirect('vehicle');
-    //         }
-
-    //     } elseif (isset($_POST['edit'])) {
-    //         $inputan = $this->input->post(null, true);
-
-    //         $config['upload_path']   = './uploads/files';
-    //         $config['allowed_types'] = 'jpg|png|jpeg';
-    //         $config['max_size']      = 2048;
-    //         $config['file_name']     = $this->input->post('tagsign');
-    //         $this->load->library('upload', $config);
-
-    //         if (@$_FILES['foto']['name'] != null) {
-    //             if ($this->upload->do_upload('foto')) {
-    //                 $inputan['foto'] = $this->upload->data('file_name');
-    //                 $this->vehicle->edit($inputan);
-    //                 // if ($this->db->affected_rows() > 0) {
-    //                 //     $this->session->set_flashdata('success', 'Data Berhasil disimpan');
-    //                 // }
-    //                 redirect('vehicle');
-    //             } else {
-    //                 // $error = $this->upload->display_errors();
-    //                 // $this->session->set_flashdata('error', $error);
-    //                 redirect('vehicle/edit');
-    //             }
-    //         } else {
-    //             $inputan['foto'] = null;
-    //             redirect('vehicle');
-    //         }
-    //     }
-    //     redirect('vehicle');
-    // }
+        $tambahan = array(
+            'stoptime' => $stoptime,
+            'pow' => $pow,
+            'desc' => $desc,
+            'count' => $count,
+            'spare' => $spare,
+        );
+        if (isset($_POST['add'])) {
+            $inputan = $this->input->post(null, true);
+            $this->trouble->add($inputan,$tambahan);
+        } elseif (isset($_POST['edit'])) {
+            $inputan = $this->input->post(null, true);
+            $this->trouble->edit($inputan, $tambahan);
+        }
+        redirect('trouble');
+    }
 }

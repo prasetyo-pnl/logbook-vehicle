@@ -5,7 +5,7 @@ class Trouble_m extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_trouble');
         if ($id != null) {
-            $this->db->where('tagsign, $id');
+            $this->db->where('id_trouble', $id);
         }
         $query = $this->db->get();
         return $query;
@@ -16,48 +16,47 @@ class Trouble_m extends CI_Model
         return $query;
     }
 
-    // function add($data)
-    // {
-    //     $param = array(
-    //         'tagsign' => $data['tagsign'],
-    //         'namakendaraan' => $data['namakendaraan'],
-    //         'type' => $data['type'],
-    //         'kapasitas' => $data['kapasitas'],
-    //         'model' => $data['model'],
-    //         'maker' => $data['maker'],
-    //         'chasis' => $data['chasis'],
-    //         'engine' => $data['engine'],
-    //         'usingdate' => $data['usingdate'],
-    //         'foto' => $data['foto'],
-    //         'kodebidang' => $data['kodebidang'],
-    //     );
-    //     $this->db->insert('tb_vehicle', $param);
-    // }
-    // function edit($data)
-    // {
-    //     $param = array(
-    //         'tagsign' => $data['tagsign'],
-    //         'namakendaraan' => $data['namakendaraan'],
-    //         'type' => $data['type'],
-    //         'kapasitas' => $data['kapasitas'],
-    //         'model' => $data['model'],
-    //         'maker' => $data['maker'],
-    //         'chasis' => $data['chasis'],
-    //         'engine' => $data['engine'],
-    //         'usingdate' => $data['usingdate'],
-    //         'foto' => $data['foto'],
-    //         'kodebidang' => $data['kodebidang'],
-    //     );
-    //     $this->db->set($param);
-    //     $this->db->where('tagsign', $data['id']);
-    //     $this->db->update('tb_vehicle');
-    // }
+    function add($data,$tambahan)
+    {
+        $param = array(
+            'tagsign' => $data['tagsign'],
+            'dateentry' => $data['dateentry'],
+            'datefinish' => $data['datefinish'],
+            'stoptime' => $tambahan['stoptime'],
+            'kindoftrouble' => $data['kindoftrouble'],
+            'partofwork' => $tambahan['pow'],
+            'description' => $tambahan['desc'],
+            'countermeasure' => $tambahan['count'],
+            'sparepart' => $tambahan['spare'],
+            'manpower' => $data['manpower'],
+            'remarks' => $data['remarks'],
+        );
+        $this->db->insert('tb_trouble', $param);
+    }
+    function edit($data,$tambahan)
+    {
+        $param = array(
+            'dateentry' => $data['dateentry'],
+            'datefinish' => $data['datefinish'],
+            'stoptime' => $tambahan['stoptime'],
+            'kindoftrouble' => $data['kindoftrouble'],
+            'partofwork' => $tambahan['pow'],
+            'description' => $tambahan['desc'],
+            'countermeasure' => $tambahan['count'],
+            'sparepart' => $tambahan['spare'],
+            'manpower' => $data['manpower'],
+            'remarks' => $data['remarks'],
+        );
+        $this->db->set($param);
+        $this->db->where('id_trouble', $data['id']);
+        $this->db->update('tb_trouble');
+    }
 
-    // function delete($id)
-    // {
-    //     $this->db->where('tagsign', $id);
-    //     $this->db->delete('tb_vehicle');
-    // }
+    function delete($id)
+    {
+        $this->db->where('id_trouble', $id);
+        $this->db->delete('tb_trouble');
+    }
 }
 
 ?>

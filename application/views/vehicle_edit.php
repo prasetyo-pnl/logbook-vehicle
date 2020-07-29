@@ -124,7 +124,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -186,7 +186,7 @@
                                             <input value="<?= $vehicle->tagsign; ?>" type="text" class="form-control" name="tagsign" required />
                                         </div>
                                         <div class="form-group col-xs-6">
-                                            <label>Nama Kendaraan</label>
+                                            <label>Vehicle Name</label>
                                             <input value="<?= $vehicle->namakendaraan; ?>" type="text" class="form-control" name="namakendaraan" required />
                                         </div>
                                     </div>
@@ -272,11 +272,6 @@
                                 <div class="form-row">
                                     <div class="form-group pull-right">
                                         <button name="edit" style="margin-right: 20px;" class="btn btn-success" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group pull-right">
-                                        <input style="margin-right: 20px;" class="btn btn-danger" type="button" onclick="resetForm()" value="Reset">
                                     </div>
                                 </div>
                             </form>

@@ -119,7 +119,7 @@
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+							<li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i>User</a></li>
 							<li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
 							<li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
 							<li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>

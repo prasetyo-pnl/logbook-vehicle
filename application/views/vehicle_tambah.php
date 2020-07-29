@@ -124,7 +124,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -308,13 +308,13 @@
             i18n: {
                 de: {
                     months: [
-                        'Januari', 'Februari', 'Maret', 'April',
-                        'Mei', 'Juni', 'Juli', 'Agustus',
-                        'September', 'Oktober', 'November', 'Desember',
+                        'January', 'February', 'March', 'April',
+                        'May', 'June', 'July', 'August',
+                        'September', 'October', 'November', 'December',
                     ],
                     dayOfWeek: [
-                        "Minggu", "Senin", "Selasa", "Rabu",
-                        "Kamis", "Jumat", "Sabtu",
+                        "Sunday", "Monday", "Thusday", "Wednesday",
+                        "Thursday", "Friday", "Saturday",
                     ]
                 }
             },

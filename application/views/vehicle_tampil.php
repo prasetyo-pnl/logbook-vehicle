@@ -121,7 +121,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -180,17 +180,17 @@
                                 <thead align="center">
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Kendaraan</th>
+                                        <th>Vehicle Name</th>
                                         <th>Tag Sign</th>
                                         <th>Type</th>
-                                        <th>Kapasitas</th>
+                                        <th>Capacity</th>
                                         <th>Model</th>
                                         <th>Maker</th>
                                         <th>Chasis</th>
                                         <th>Engine</th>
                                         <th>Using Date</th>
                                         <th>Plant</th>
-                                        <th>foto</th>
+                                        <th>Iamge</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

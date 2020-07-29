@@ -179,26 +179,18 @@
                         <div class="box-body table-responsive">
 
                             <form class="" id="form1" method="POST" action="<?= site_url('trouble/proses') ?>" enctype="multipart/form-data">
-
+                                <input type="hidden" name="id" value="<?= $trouble->id_trouble; ?>">
                                 <table class="table table-bordered table-striped">
                                     <div class="container-fluid">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Tag Sign</label>
-
-                                                <select class="form-control" name="tagsign">
-                                                    <?php
-                                                    foreach ($tagsign as $t => $row) { ?>
-                                                        <option value="<?= $row->tagsign ?>"><?= $row->tagsign ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
+                                                <input type="text" class="form-control pull-right" name="tagsign" value="<?= $trouble->tagsign; ?>" disabled />
                                             </div>
                                             <div class="form-group col-xs-6">
                                                 <label>Date Entry</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control pull-right" name="dateentry" id="datepicker" required />
+                                                    <input type="text" class="form-control pull-right" name="dateentry" id="datepicker" value="<?= $trouble->dateentry; ?>" />
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -210,17 +202,27 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Kind Of Trouble</label>
-
                                                 <select class="form-control" name="kindoftrouble">
-                                                    <option value="Trouble">Trouble</option>
-                                                    <option value="Preventif Maintenance">Preventif Maintenance</option>
-                                                    <option value="Periodical Inspection">Periodical Inspection</option>
+                                                    <?php
+                                                    if ($trouble->kindoftrouble == 'Trouble') { ?>
+                                                        <option value="Trouble" selected>Trouble</option>
+                                                        <option value="Preventif Maintenance">Preventif Maintenance</option>
+                                                        <option value="Periodical Inspection">Periodical Inspection</option><?php
+                                                                                                                        } else if ($trouble->kindoftrouble == 'Periodical Inspection') { ?>
+                                                        <option value="Trouble">Trouble</option>
+                                                        <option value="Preventif Maintenance">Preventif Maintenance</option>
+                                                        <option value="Periodical Inspection" selected>Periodical Inspection</option><?php
+                                                                                                                                    } else if ($trouble->kindoftrouble == 'Preventif Maintenance') { ?>
+                                                        <option value="Trouble">Trouble</option>
+                                                        <option value="Preventif Maintenance" selected>Preventif Maintenance</option>
+                                                        <option value="Periodical Inspection">Periodical Inspection</option><?php
+                                                                                                                                    } ?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-xs-6">
                                                 <label>Date Finish</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control pull-right" name="datefinish" id="datepickeri" required />
+                                                    <input type="text" class="form-control pull-right" name="datefinish" id="datepickeri" value="<?= $trouble->datefinish; ?>" />
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -236,57 +238,119 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="row">
+                                                    <?php
+                                                    $pow = $trouble->partofwork;
+                                                    $pisah = explode(";", $pow);
+
+                                                    ?>
                                                     <div class="col-12">
                                                         <label for="pow1">
-                                                            <input id="pow1" type="checkbox" name="pow[]" class="flat-red" value="Engine">
+                                                            <input id="pow1" type="checkbox" name="pow[]" class="flat-red" value="Engine" <?php
+                                                                                                                                            for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                if ($pisah[$i] == 'Engine') {
+                                                                                                                                                    echo "checked";
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                            ?>>
                                                             Engine
+                                                            <?php
+
+                                                            ?>
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow2">
-                                                            <input id="pow2" type="checkbox" name="pow[]" class="flat-red" value="Transmisi">
+                                                            <input id="pow2" type="checkbox" name="pow[]" class="flat-red" value="Transmisi" <?php
+                                                                                                                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                    if ($pisah[$i] == 'Transmisi') {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                ?>>
                                                             Transmisi
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow3">
-                                                            <input id="pow3" type="checkbox" name="pow[]" class="flat-red" value="Brake">
+                                                            <input id="pow3" type="checkbox" name="pow[]" class="flat-red" value="Brake" <?php
+                                                                                                                                            for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                if ($pisah[$i] == 'Brake') {
+                                                                                                                                                    echo "checked";
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                            ?>>
                                                             Brake
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow4">
-                                                            <input id="pow4" type="checkbox" name="pow[]" class="flat-red" value="Hydraulic">
+                                                            <input id="pow4" type="checkbox" name="pow[]" class="flat-red" value="Hydraulic" <?php
+                                                                                                                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                    if ($pisah[$i] == 'Hydraulic') {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                ?>>
                                                             Hydraulic
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow5">
-                                                            <input id="pow5" type="checkbox" name="pow[]" class="flat-red" value="Attachment">
+                                                            <input id="pow5" type="checkbox" name="pow[]" class="flat-red" value="Attachment" <?php
+                                                                                                                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                    if ($pisah[$i] == 'Attachment') {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                ?>>
                                                             Attachment
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow6">
-                                                            <input id="pow6" type="checkbox" name="pow[]" class="flat-red" value="Body Chasis">
+                                                            <input id="pow6" type="checkbox" name="pow[]" class="flat-red" value="Body Chasis" <?php
+                                                                                                                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                    if ($pisah[$i] == 'Body Chasis') {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                ?>>
                                                             Body Chasis
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow7">
-                                                            <input id="pow7" type="checkbox" name="pow[]" class="flat-red" value="Steering">
+                                                            <input id="pow7" type="checkbox" name="pow[]" class="flat-red" value="Steering" <?php
+                                                                                                                                            for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                if ($pisah[$i] == 'Steering') {
+                                                                                                                                                    echo "checked";
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                            ?>>
                                                             Steering
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow8">
-                                                            <input id="pow8" type="checkbox" name="pow[]" class="flat-red" value="Electrical">
+                                                            <input id="pow8" type="checkbox" name="pow[]" class="flat-red" value="Electrical" <?php
+                                                                                                                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                                    if ($pisah[$i] == 'Electrical') {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                ?>>
                                                             Electrical
                                                         </label>
                                                     </div>
                                                     <div class="col-12">
                                                         <label for="pow9">
-                                                            <input id="pow9" type="checkbox" name="pow[]" class="flat-red" value="All">
+                                                            <input id="pow9" type="checkbox" name="pow[]" class="flat-red" value="All" <?php
+                                                                                                                                        for ($i = 0; $i < count($pisah); $i++) {
+                                                                                                                                            if ($pisah[$i] == 'All') {
+                                                                                                                                                echo "checked";
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                        ?>>
                                                             All
                                                         </label>
                                                     </div>
@@ -304,8 +368,18 @@
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </div>
+                                                <?php
+                                                $desc = $trouble->description;
+                                                $pisah = explode(";", $desc);
+                                                ?>
                                                 <div id="desc">
-                                                    <input type="text" class="form-control" name="description[]" />
+                                                    <?php
+                                                    for ($i = 0; $i < count($pisah); $i++) { ?>
+                                                        <input value="<?= $pisah[$i] ?>" type="text" class="form-control" name="description[]" />
+
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,8 +397,17 @@
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
+                                            <?php
+                                            $spare = $trouble->sparepart;
+                                            $pisah = explode(";", $spare);
+                                            ?>
                                             <div id="spare">
-                                                <input type="text" class="form-control" name="sparepart[]" />
+                                                <?php
+                                                for ($i = 0; $i < count($pisah); $i++) { ?>
+                                                    <input value="<?= $pisah[$i] ?>" type="text" class="form-control" name="sparepart[]" />
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
@@ -341,8 +424,17 @@
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </div>
+                                                <?php
+                                                $count = $trouble->sparepart;
+                                                $pisah = explode(";", $count);
+                                                ?>
                                                 <div id="count">
-                                                    <input type="text" class="form-control" name="countermeasure[]" />
+                                                    <?php
+                                                    for ($i = 0; $i < count($pisah); $i++) { ?>
+                                                        <input value="<?= $pisah[$i] ?>" type="text" class="form-control" name="countermeasure[]" />
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -352,25 +444,20 @@
                                             <div class="form-group col-xs-6">
                                                 <label>Man Power</label>
                                                 <a href="" style="visibility: hidden;" class="btn" visible="true">:</a>
-                                                <input type="text" class="form-control" name="manpower" required />
+                                                <input value="<?= $trouble->manpower ?>" type="text" class="form-control" name="manpower" required />
                                             </div>
 
                                             <div class="form-group col-xs-6">
                                                 <label>Remarks</label>
                                                 <a href="" style="visibility: hidden;" class="btn" visible="true">:</a>
-                                                <input type="text" class="form-control" name="remarks" required />
+                                                <input value="<?= $trouble->remarks ?>" type="text" class="form-control" name="remarks" required />
                                             </div>
                                         </div>
                                     </div>
                                 </table>
                                 <div class="form-row">
                                     <div class="form-group pull-right">
-                                        <button name="add" style="margin-right: 20px;" class="btn btn-success" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group pull-right">
-                                        <input style="margin-right: 20px;" class="btn btn-danger" type="button" onclick="resetForm()" value="Reset">
+                                        <button name="edit" style="margin-right: 20px;" class="btn btn-success" type="submit">Submit</button>
                                     </div>
                                 </div>
                             </form>

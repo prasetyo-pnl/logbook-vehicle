@@ -121,7 +121,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -195,28 +195,69 @@
                                     </tr>
                                 </thead>
                                 <?php
-                                $no = 1;
+                                $nodata = 1;
                                 foreach ($trouble as $t => $row) { ?>
 
                                     <tbody>
                                         <tr>
-                                            <td><?= $no++ ?></td>
+                                            <td><?= $nodata ?></td>
                                             <td><?= $row->tagsign; ?></td>
                                             <td><?= $row->dateentry; ?></td>
                                             <td><?= $row->datefinish; ?></td>
                                             <td><?= $row->stoptime; ?></td>
                                             <td><?= $row->kindoftrouble; ?></td>
-                                            <td><?= $row->partofwork; ?></td>
-                                            <td><?= $row->description; ?></td>
-                                            <td><?= $row->countermeasure; ?></td>
-                                            <td><?= $row->sparepart; ?></td>
+                                            <td>
+                                                <?php
+                                                $pow = $row->partofwork;
+                                                $pisah = explode(";", $pow);
+                                                $no = 1;
+                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                    echo $no . ". " . $pisah[$i] . "<br>";
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $desc = $row->description;
+                                                $pisah = explode(";", $desc);
+                                                $no = 1;
+                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                    echo $no . ". " . $pisah[$i] . "<br>";
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $count = $row->countermeasure;
+                                                $pisah = explode(";", $count);
+                                                $no = 1;
+                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                    echo $no . ". " . $pisah[$i] . "<br>";
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $spare = $row->sparepart;
+                                                $pisah = explode(";", $spare);
+                                                $no = 1;
+                                                for ($i = 0; $i < count($pisah); $i++) {
+                                                    echo $no . ". " . $pisah[$i] . "<br>";
+                                                    $no++;
+                                                }
+                                                $nodata++;
+                                                ?>
+                                            </td>
                                             <td><?= $row->manpower; ?></td>
                                             <td><?= $row->remarks; ?></td>
                                             <td class="text-center" width=" 160px">
-                                                <a href="#"" class=" btn btn-warning btn-xs">
+                                                <a href="<?= site_url('trouble/edit/' . $row->id_trouble) ?>" class=" btn btn-warning btn-xs">
                                                     <i class="fa fa-pencil"></i> Edit
                                                 </a>
-                                                <a href="#" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                                <a href="<?= site_url('trouble/delete/' . $row->id_trouble) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
                                             </td>

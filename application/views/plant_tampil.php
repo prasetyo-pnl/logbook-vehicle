@@ -121,7 +121,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('pengguna'); ?>"><i class="fa fa-circle-o"></i> Pengguna</a></li>
+                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -180,8 +180,8 @@
                                 <thead align="center">
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Plant</th>
-                                        <th>Nama Plant</th>
+                                        <th>Plant Code</th>
+                                        <th>Plant Name</th>
                                         <th>Action</>
                                     </tr>
                                 </thead>
