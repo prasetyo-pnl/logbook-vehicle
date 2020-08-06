@@ -122,9 +122,9 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
-                            <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plant</a></li>
+                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
-                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Trouble</a></li>
+                            <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -152,12 +152,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-                    <li class="active">Trouble</li>
+                    <li>Plant</li>
+                    <li class="active">Edit Plant</li>
                 </ol>
             </section>
 
@@ -165,113 +165,35 @@
             <section class="content">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Data Trouble</h3>
+                        <h3 class="box-title">Edit Data Plant</h3>
                         <div class="pull-right">
-                            <a href="<?= site_url('trouble/add') ?>" class="btn btn-success">
-                                <i class="fa fa-plus"></i> Add
-                            </a>
                         </div>
                     </div>
 
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-body table-responsive">
-                            <table class="table table-bordered table-striped text-center" id="table1">
 
-                                <thead align="center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tag Sign</th>
-                                        <th>Date Entry</th>
-                                        <th>Date Finish</th>
-                                        <th>Stop Time</th>
-                                        <th>Kind Of Trouble</th>
-                                        <th>Part Of Work</th>
-                                        <th>Description</th>
-                                        <th>Couter Measure</th>
-                                        <th>Spare Part</th>
-                                        <th>Man Power</th>
-                                        <th>Remarks</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $nodata = 1;
-                                foreach ($trouble as $t => $row) { ?>
-
-                                    <tbody>
-                                        <tr>
-                                            <td><?= $nodata ?></td>
-                                            <td><?= $row->tagsign; ?></td>
-                                            <td><?php
-                                                echo date("d-m-yy H:i", strtotime($row->dateentry));
-                                                ?></td>
-                                            <td><?php
-                                                echo date("d-m-yy H:i", strtotime($row->datefinish));
-                                                ?></td>
-                                            <td><?= $row->stoptime; ?></td>
-                                            <td><?= $row->kindoftrouble; ?></td>
-                                            <td>
-                                                <?php
-                                                $pow = $row->partofwork;
-                                                $pisah = explode(";", $pow);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $desc = $row->description;
-                                                $pisah = explode(";", $desc);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $count = $row->countermeasure;
-                                                $pisah = explode(";", $count);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $spare = $row->sparepart;
-                                                $pisah = explode(";", $spare);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                $nodata++;
-                                                ?>
-                                            </td>
-                                            <td><?= $row->manpower; ?></td>
-                                            <td><?= $row->remarks; ?></td>
-                                            <td class="text-center" width=" 160px">
-                                                <a href="<?= site_url('trouble/edit/' . $row->id_trouble) ?>" class=" btn btn-warning btn-xs">
-                                                    <i class="fa fa-pencil"></i> Edit
-                                                </a>
-                                                <a href="<?= site_url('trouble/delete/' . $row->id_trouble) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                <?php
-                                }
-                                ?>
-                            </table>
+                            <form id="form1" method="POST" action="<?= site_url('plant/proses') ?>" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<?= $plant->kodebidang; ?>">
+                                <table class="table table-bordered table-striped justify-content-center">
+                                    <div class="form-row" style="padding: 0px 90px 0px 90px;">
+                                        <div class="form-group col-xs-6" style="padding-right: 50px;">
+                                            <label>Code</label>
+                                            <input value="<?= $plant->kodebidang; ?>" type="text" class="form-control" name="codePlant" required />
+                                        </div>
+                                        <div class="form-group col-xs-6" style="padding-left: 50px;">
+                                            <label>Name</label>
+                                            <input value="<?= $plant->namabidang; ?>" type="text" class="form-control" name="namePlant" required />
+                                        </div>
+                                    </div>
+                                </table>
+                                <div class="form-row" style="margin-right: 85px;">
+                                    <div class="form-group pull-right">
+                                        <button name="edit" style="margin-right: 20px;" class="btn btn-success" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

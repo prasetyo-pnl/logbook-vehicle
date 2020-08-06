@@ -39,7 +39,7 @@ class Weekly extends CI_Controller
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
         );
-        $this->load->view('weekly_tampil', $data);
+        $this->load->view('weekly_report', $data);
     }
     public function report()
     {
@@ -81,7 +81,7 @@ class Weekly extends CI_Controller
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
         );
-        $this->load->view('weekly_tampil', $data);
+        $this->load->view('weekly_report', $data);
     }
 
     // public function proses()

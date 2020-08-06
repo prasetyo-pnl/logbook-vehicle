@@ -122,7 +122,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
-                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Plants</a></li>
+                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
@@ -152,7 +152,6 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Halaman Vehicle
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
@@ -167,7 +166,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Data Plant</h3>
                         <div class="pull-right">
-                            <a href="<?= site_url('plant/add') ?>" class="btn btn-success btn-flat">
+                            <a href="<?= site_url('plant/add') ?>" class="btn btn-success">
                                 <i class="fa fa-plus"></i> Add
                             </a>
                         </div>
@@ -196,10 +195,10 @@
                                             <td><?= $row->kodebidang; ?></td>
                                             <td><?= $row->namabidang; ?></td>
                                             <td class="text-center" width=" 160px">
-                                                <a href="#"" class=" btn btn-warning btn-xs">
+                                                <a href="<?= site_url('plant/edit/' . $row->kodebidang) ?>"" class=" btn btn-warning btn-xs">
                                                     <i class="fa fa-pencil"></i> Edit
                                                 </a>
-                                                <a href="#" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                                <a href="<?= site_url('plant/delete/' . $row->kodebidang) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
                                             </td>

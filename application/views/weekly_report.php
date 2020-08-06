@@ -11,16 +11,32 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css">
+    <!-- plugin datetimepicker -->
+    <link rel="stylesheet" href="<?= base_url() ?>node_modules/jquery-datetimepicker/jquery.datetimepicker.css">
+    <style>
+        .line-title {
+            border: 0;
+            border-style: inset;
+            border-top: 1px solid #000;
+        }
 
+        .contain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+        }
+    </style>
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -31,7 +47,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?= base_url() ?>" class="logo">
+            <a href="<?= site_url(); ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>VLS</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -95,7 +111,7 @@
                     </div>
                     <div class="pull-left info">
                         <p>Admin</p>
-                        <a href=""><i class="fa fa-circle text-success"></i> Online</a>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <!-- search form -->
@@ -113,7 +129,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
 
-                    <li class="treeview active">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-edit"></i> <span>Input</span>
                             <span class="pull-right-container">
@@ -124,10 +140,10 @@
                             <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
-                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Trouble</a></li>
+                            <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview active">
                         <a href="#">
                             <i class="fa fa-table"></i> <span>Report</span>
                             <span class="pull-right-container">
@@ -135,7 +151,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('weekly'); ?>"><i class="fa fa-circle-o"></i> Weekly</a></li>
+                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Weekly</a></li>
                             <li><a href="<?= site_url('monthly'); ?>"><i class="fa fa-circle-o"></i> Monthly</a></li>
                             <li><a href="<?= site_url('range'); ?>"><i class="fa fa-circle-o"></i> Date Range </a></li>
                         </ul>
@@ -152,12 +168,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-                    <li class="active">Trouble</li>
+                    <li><a href="<?= site_url('weekly'); ?>">Weekly</a></li>
+                    <li class="active">Report</li>
                 </ol>
             </section>
 
@@ -165,115 +181,68 @@
             <section class="content">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Data Trouble</h3>
-                        <div class="pull-right">
-                            <a href="<?= site_url('trouble/add') ?>" class="btn btn-success">
-                                <i class="fa fa-plus"></i> Add
-                            </a>
-                        </div>
+
+                        <form id="form1" method="POST" action="<?= site_url('weekly/report') ?>" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col-md-3" style="margin-right: 50px;">
+                                    <label>Date</label>
+                                    <div class="input-group date">
+                                        <input value="<?= $hariini ?>" type="text" class="form-control" name="date" id="datepicker" />
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="margin-right: 50px;">
+                                    <label>Jenis Kendaraan</label>
+                                    <select class="form-control" name="tagSort">
+                                        <option value="all">- All -</option>
+                                        <?php
+                                        foreach ($tagsign as $t => $row) {
+                                            if ($tagsort == $row->tagsign) { ?>
+                                                <option selected value="<?= $row->tagsign ?>"><?= $row->tagsign ?></option>
+                                            <?php
+                                            } else { ?>
+                                                <option value="<?= $row->tagsign ?>"><?= $row->tagsign ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3" style="margin-right: 50px;">
+                                    <label>Plant</label>
+                                    <select class="form-control" name="plantSort">
+                                        <option value="all">- All -</option>
+                                        <?php
+                                        foreach ($plant as $p => $row) {
+                                            if ($plantsort == $row->kodebidang) { ?>
+                                                <option selected value="<?= $row->kodebidang ?>"><?= $row->kodebidang ?></option>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <option value="<?= $row->kodebidang ?>"><?= $row->kodebidang ?></option>
+                                            <?php
+                                            } ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row  pull-right">
+                                <div class="form-group">
+                                    <button name="show" style="margin-right: 15px; margin-top:25px; padding:5px; padding-bottom:6px;" class="btn btn-success" type="submit">Show Data</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- Default box -->
-                    <div class="box">
-                        <div class="box-body table-responsive">
-                            <table class="table table-bordered table-striped text-center" id="table1">
+                    <!-- report -->
+                    <?php $this->load->view('report/weekly_print') ?>
 
-                                <thead align="center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tag Sign</th>
-                                        <th>Date Entry</th>
-                                        <th>Date Finish</th>
-                                        <th>Stop Time</th>
-                                        <th>Kind Of Trouble</th>
-                                        <th>Part Of Work</th>
-                                        <th>Description</th>
-                                        <th>Couter Measure</th>
-                                        <th>Spare Part</th>
-                                        <th>Man Power</th>
-                                        <th>Remarks</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $nodata = 1;
-                                foreach ($trouble as $t => $row) { ?>
-
-                                    <tbody>
-                                        <tr>
-                                            <td><?= $nodata ?></td>
-                                            <td><?= $row->tagsign; ?></td>
-                                            <td><?php
-                                                echo date("d-m-yy H:i", strtotime($row->dateentry));
-                                                ?></td>
-                                            <td><?php
-                                                echo date("d-m-yy H:i", strtotime($row->datefinish));
-                                                ?></td>
-                                            <td><?= $row->stoptime; ?></td>
-                                            <td><?= $row->kindoftrouble; ?></td>
-                                            <td>
-                                                <?php
-                                                $pow = $row->partofwork;
-                                                $pisah = explode(";", $pow);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $desc = $row->description;
-                                                $pisah = explode(";", $desc);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $count = $row->countermeasure;
-                                                $pisah = explode(";", $count);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $spare = $row->sparepart;
-                                                $pisah = explode(";", $spare);
-                                                $no = 1;
-                                                for ($i = 0; $i < count($pisah); $i++) {
-                                                    echo $no . ". " . $pisah[$i] . "<br>";
-                                                    $no++;
-                                                }
-                                                $nodata++;
-                                                ?>
-                                            </td>
-                                            <td><?= $row->manpower; ?></td>
-                                            <td><?= $row->remarks; ?></td>
-                                            <td class="text-center" width=" 160px">
-                                                <a href="<?= site_url('trouble/edit/' . $row->id_trouble) ?>" class=" btn btn-warning btn-xs">
-                                                    <i class="fa fa-pencil"></i> Edit
-                                                </a>
-                                                <a href="<?= site_url('trouble/delete/' . $row->id_trouble) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                <?php
-                                }
-                                ?>
-                            </table>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.box -->
             </section>
@@ -295,34 +264,46 @@
     <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="<?= base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="<?= base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <!-- SlimScroll -->
     <script src="<?= base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="<?= base_url() ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- DataTables -->
-    <script src="<?= base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>assets/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="<?= base_url() ?>assets/dist/js/demo.js"></script>
     <!-- ChartJS -->
     <script src="<?= base_url() ?>assets/bower_components/chart.js/Chart.js"></script>
     <!-- Native js -->
     <!-- <script src="<?= base_url() ?>assets/js/script.js"></script> -->
+    <!-- plugin dattimepicker -->
+    <script src="<?= base_url() ?>node_modules/jquery/dist/jquery.js"></script>
+    <script src="<?= base_url() ?>node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#table1').DataTable({
-                'paging': false,
-                'lengthChange': false,
-                'searching': true,
-                'ordering': false,
-                'info': true,
-                'autoWidth': false
-            });
-        })
-    </script>
+        jQuery.datetimepicker.setLocale('id');
 
+        jQuery('#datepicker').datetimepicker({
+            i18n: {
+                de: {
+                    months: [
+                        'January', 'February', 'March', 'April',
+                        'May', 'June', 'July', 'August',
+                        'September', 'October', 'November', 'December',
+                    ],
+                    dayOfWeek: [
+                        "Sunday", "Monday", "Thusday", "Wednesday",
+                        "Thursday", "Friday", "Saturday",
+                    ]
+                }
+            },
+            timepicker: false,
+            format: 'd-m-Y '
+        });
+
+        function resetForm() {
+            document.getElementById("form1").reset();
+        }
+    </script>
 </body>
 
 </html>

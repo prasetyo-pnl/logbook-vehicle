@@ -126,7 +126,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
-                            <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
+                            <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
@@ -155,13 +155,13 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Halaman Trouble
+
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                     <li><a href="<?= site_url('trouble'); ?>">Trouble</a></li>
-                    <li class="active">Add Trouble</li>
+                    <li class="active">Edit Trouble</li>
                 </ol>
             </section>
 
@@ -169,7 +169,7 @@
             <section class="content">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Input Trouble</h3>
+                        <h3 class="box-title">Edit Data Trouble</h3>
                         <div class="pull-right">
                         </div>
                     </div>

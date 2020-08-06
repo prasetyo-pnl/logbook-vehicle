@@ -122,7 +122,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
-                            <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
+                            <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
@@ -152,7 +152,6 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Halaman Vehicle
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
@@ -165,9 +164,9 @@
             <section class="content">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Data Vehicle</h3>
+                        <h2 class="box-title">Data Vehicle</h2>
                         <div class="pull-right">
-                            <a href="<?= site_url('vehicle/add') ?>" class="btn btn-success btn-flat">
+                            <a href="<?= site_url('vehicle/add') ?>" class="btn btn-success">
                                 <i class="fa fa-plus"></i> Add
                             </a>
                         </div>
