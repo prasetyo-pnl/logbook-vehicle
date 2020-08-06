@@ -130,17 +130,18 @@
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
                     </li>
-                    <li class="">
-                        <a href="<?= site_url('report'); ?>">
+                    <li class="treeview">
+                        <a href="#">
                             <i class="fa fa-table"></i> <span>Report</span>
                             <span class="pull-right-container">
-                                <!-- <i class="fa fa-angle-left pull-right"></i> -->
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <!-- <ul class="treeview-menu">
-							<li><a href=""><i class="fa fa-circle-o"></i> Simple tables</a></li>
-							<li><a href=""><i class="fa fa-circle-o"></i> Data tables</a></li>
-						</ul> -->
+                        <ul class="treeview-menu">
+                            <li><a href="<?= site_url('weekly'); ?>"><i class="fa fa-circle-o"></i> Weekly</a></li>
+                            <li><a href="<?= site_url('monthly'); ?>"><i class="fa fa-circle-o"></i> Monthly</a></li>
+                            <li><a href="<?= site_url('range'); ?>"><i class="fa fa-circle-o"></i> Date Range </a></li>
+                        </ul>
                     </li>
 
                 </ul>

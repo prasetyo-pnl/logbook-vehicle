@@ -131,19 +131,19 @@
                             <li class="active"><a href=""><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
                     </li>
-                    <li class="">
-                        <a href="<?= site_url('report'); ?>">
+                    <li class="treeview">
+                        <a href="#">
                             <i class="fa fa-table"></i> <span>Report</span>
                             <span class="pull-right-container">
-                                <!-- <i class="fa fa-angle-left pull-right"></i> -->
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <!-- <ul class="treeview-menu">
-							<li><a href=""><i class="fa fa-circle-o"></i> Simple tables</a></li>
-							<li><a href=""><i class="fa fa-circle-o"></i> Data tables</a></li>
-						</ul> -->
+                        <ul class="treeview-menu">
+                            <li><a href="<?= site_url('weekly'); ?>"><i class="fa fa-circle-o"></i> Weekly</a></li>
+                            <li><a href="<?= site_url('monthly'); ?>"><i class="fa fa-circle-o"></i> Monthly</a></li>
+                            <li><a href="<?= site_url('range'); ?>"><i class="fa fa-circle-o"></i> Date Range </a></li>
+                        </ul>
                     </li>
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -190,7 +190,7 @@
                                             <div class="form-group col-xs-6">
                                                 <label>Date Entry</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control pull-right" name="dateentry" id="datepicker" value="<?= $trouble->dateentry; ?>" />
+                                                    <input type="text" class="form-control pull-right" name="dateentry" id="datepicker" value="<?= date("d-m-yy H:i", strtotime($trouble->dateentry)); ?>" />
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -222,7 +222,7 @@
                                             <div class="form-group col-xs-6">
                                                 <label>Date Finish</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control pull-right" name="datefinish" id="datepickeri" value="<?= $trouble->datefinish; ?>" />
+                                                    <input type="text" class="form-control pull-right" name="datefinish" id="datepickeri" value="<?= date("d-m-yy H:i", strtotime($trouble->datefinish)); ?>" />
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>

@@ -5,18 +5,18 @@ class Trouble extends CI_Controller
 {
     function __construct()
     {
-        parent:: __construct();
+        parent::__construct();
         $this->load->model('trouble_m', 'trouble');
     }
 
     public function index()
     {
         $query = $this->trouble->get();
-        
+
         $data = array(
-            'header'=> 'Tampil Data Trouble',
-            'trouble'=> $query->result(),
-            
+            'header' => 'Tampil Data Trouble',
+            'trouble' => $query->result(),
+
         );
         $this->load->view('trouble_tampil', $data);
     }
@@ -51,11 +51,24 @@ class Trouble extends CI_Controller
     {
         $dateentry = $this->input->post('dateentry');
         $datefinish = $this->input->post('datefinish');
-        $harientry = date("d", strtotime($dateentry));
-        $harifinish = date("d", strtotime($datefinish));
-        $jamentry = date("H", strtotime($dateentry));
-        $jamfinish = date("H", strtotime($datefinish));
-        $stoptime =((($harifinish - $harientry)* 24) - $jamentry) + $jamfinish;
+
+        $dateentry1 = date("yy-m-d H:i", strtotime($dateentry));
+        $datefinish1 = date("yy-m-d H:i", strtotime($datefinish));
+
+        $kalender = CAL_GREGORIAN;
+        $bulanentry = date("m", strtotime($dateentry1));
+        $tahunentry = date("Y", strtotime($dateentry1));
+
+        $jharientry = cal_days_in_month($kalender, $bulanentry, $tahunentry);
+
+        $harientry = date("d", strtotime($dateentry1));
+        $harifinish = date("d", strtotime($datefinish1));
+        $jamentry = date("H", strtotime($dateentry1));
+        $jamfinish = date("H", strtotime($datefinish1));
+        if ($harifinish < $harientry) {
+            $harifinish = $harifinish + $jharientry;
+        }
+        $stoptime = ((($harifinish - $harientry) * 24) - $jamentry) + $jamfinish;
 
         $pow = implode(";", $this->input->post('pow'));
         $desc = implode(";", $this->input->post('description'));
@@ -68,10 +81,12 @@ class Trouble extends CI_Controller
             'desc' => $desc,
             'count' => $count,
             'spare' => $spare,
+            'dateentry' => $dateentry1,
+            'datefinish' => $datefinish1,
         );
         if (isset($_POST['add'])) {
             $inputan = $this->input->post(null, true);
-            $this->trouble->add($inputan,$tambahan);
+            $this->trouble->add($inputan, $tambahan);
         } elseif (isset($_POST['edit'])) {
             $inputan = $this->input->post(null, true);
             $this->trouble->edit($inputan, $tambahan);

@@ -20,8 +20,8 @@ class Trouble_m extends CI_Model
     {
         $param = array(
             'tagsign' => $data['tagsign'],
-            'dateentry' => $data['dateentry'],
-            'datefinish' => $data['datefinish'],
+            'dateentry' => $tambahan['dateentry'],
+            'datefinish' => $tambahan['datefinish'],
             'stoptime' => $tambahan['stoptime'],
             'kindoftrouble' => $data['kindoftrouble'],
             'partofwork' => $tambahan['pow'],
@@ -36,8 +36,8 @@ class Trouble_m extends CI_Model
     function edit($data,$tambahan)
     {
         $param = array(
-            'dateentry' => $data['dateentry'],
-            'datefinish' => $data['datefinish'],
+            'dateentry' => $tambahan['dateentry'],
+            'datefinish' => $tambahan['datefinish'],
             'stoptime' => $tambahan['stoptime'],
             'kindoftrouble' => $data['kindoftrouble'],
             'partofwork' => $tambahan['pow'],
@@ -58,5 +58,3 @@ class Trouble_m extends CI_Model
         $this->db->delete('tb_trouble');
     }
 }
-
-?>
