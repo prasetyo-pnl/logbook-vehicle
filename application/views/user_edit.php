@@ -193,6 +193,7 @@
                                             <label>Plant</label>
 
                                             <select class=" form-control" name="plant">
+                                                <option> </option>
                                                 <?php
                                                 foreach ($plant as $p => $row) {
                                                     if ($row->kodebidang == $user->kodebidang) { ?>

@@ -7,17 +7,15 @@
                 <th rowspan="5" colspan="7">
                     <div class="contain">
                         <div>
-                            <p>WEEKLY REPORT OF VEHICLE PERFORMANCE</p>
+                            <p>DATE RANGE REPORT OF VEHICLE PERFORMANCE</p>
                             <p align="center">
                                 <?php
-                                echo $batas . " s/d " . $hariini;
+                                echo $dateStart . " s/d " . $dateFinish;
                                 ?>
                             </p>
                         </div>
                     </div>
                 </th>
-
-                <!--?php echo $tgl2 . " - " . $hariini; ?>-->
                 <th>Section</th>
                 <th>SSW-3</th>
             </tr>
@@ -52,31 +50,35 @@
             $no = 0;
             $total = 0;
             $hitung = 0;
-            foreach ($weekly as $w => $row) {
+            if ($range != null) {
 
-                $no++;
+
+                foreach ($range as $r => $row) {
+
+                    $no++;
             ?>
-                <tbody>
-                    <tr>
-                        <td><?php echo $no; ?></td>
-                        <td><?php echo $row->tagsign; ?></td>
-                        <td><?php echo $row->type   ?></td>
-                        <td><?php echo $row->kodebidang   ?></td>
-                        <td><?php echo 168; ?></td>
-                        <td><?php echo $row->shutdown ?></td>
-                        <td><?php echo $row->troublefrec ?></td>
-                        <td>
-                            <?php
-                            $availability = (((168 - $row->shutdown) / 168) * 100);
-                            $total = $total + $availability;
-                            echo $availability = number_format($availability, 2) . " %";
-                            $hitung++;
-                            ?>
-                        </td>
-                        <td><?php echo $row->remarks   ?></td>
-                    </tr>
-                </tbody>
+                    <tbody>
+                        <tr>
+                            <td><?php echo $no; ?></td>
+                            <td><?php echo $row->tagsign; ?></td>
+                            <td><?php echo $row->type   ?></td>
+                            <td><?php echo $row->kodebidang   ?></td>
+                            <td><?php echo 168; ?></td>
+                            <td><?php echo $row->shutdown ?></td>
+                            <td><?php echo $row->troublefrec ?></td>
+                            <td>
+                                <?php
+                                $availability = (((168 - $row->shutdown) / 168) * 100);
+                                $total = $total + $availability;
+                                echo $availability = number_format($availability, 2) . " %";
+                                $hitung++;
+                                ?>
+                            </td>
+                            <td><?php echo $row->remarks   ?></td>
+                        </tr>
+                    </tbody>
             <?php
+                }
             }
             ?>
             <tr>
@@ -119,8 +121,8 @@
                 <th>AVAILABILITY</th>
             </tr>
             <?php
-            $batas = date('yy-m-d', strtotime($batas));
-            $hariini = date('yy-m-d', strtotime($hariini));
+            $dateFinish = date('yy-m-d', strtotime($dateFinish));
+            $dateStart = date('yy-m-d', strtotime($dateStart));
             $total = 0;
             $hitungPlant = 0;
             foreach ($plant as $p => $row) {
@@ -134,13 +136,13 @@
                     <td>
                         <?php
                         if ($tagsort == 'all' and $plantsort == 'all') {
-                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$batas' AND '$hariini' AND tb_vehicle.kodebidang = '$bidang' GROUP BY tb_trouble.tagsign");
+                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$dateStart' AND '$dateFinish' AND tb_vehicle.kodebidang = '$bidang' GROUP BY tb_trouble.tagsign");
                         } elseif ($tagsort == 'all') {
-                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$batas' AND '$hariini' AND tb_vehicle.kodebidang = '$bidang' AND tb_vehicle.kodebidang = '$plantsort' GROUP BY tb_trouble.tagsign");
+                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$dateStart' AND '$dateFinish' AND tb_vehicle.kodebidang = '$bidang' AND tb_vehicle.kodebidang = '$plantsort' GROUP BY tb_trouble.tagsign");
                         } elseif ($plantsort == 'all') {
-                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND tb_trouble.tagsign = '$tagsort' AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$batas' AND '$hariini' AND tb_vehicle.kodebidang = '$bidang' GROUP BY tb_trouble.tagsign");
+                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND tb_trouble.tagsign = '$tagsort' AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$dateStart' AND '$dateFinish' AND tb_vehicle.kodebidang = '$bidang' GROUP BY tb_trouble.tagsign");
                         } else {
-                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND tb_trouble.tagsign = '$tagsort' AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$batas' AND '$hariini' AND tb_vehicle.kodebidang = '$bidang' AND tb_vehicle.kodebidang = '$plantsort' GROUP BY tb_trouble.tagsign");
+                            $query = $this->db->query("SELECT tb_trouble.tagsign, dateentry, SUM(stoptime) AS shutdown FROM tb_vehicle, tb_trouble WHERE tb_vehicle.tagsign = tb_trouble.tagsign AND tb_trouble.tagsign = '$tagsort' AND DATE_FORMAT(dateentry, '%Y-%m-%d') BETWEEN '$dateStart' AND '$dateFinish' AND tb_vehicle.kodebidang = '$bidang' AND tb_vehicle.kodebidang = '$plantsort' GROUP BY tb_trouble.tagsign");
                         }
 
                         $hitung = 0;

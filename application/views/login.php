@@ -25,7 +25,7 @@
                                     <p>Vehicle Maintenance</p>
                                 </div>
                             </div>
-                            <form action="<?= site_url('auth/proses') ?>" method="post" name="login">
+                            <form action="<?= site_url('auth/proses') ?>" method="post">
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" required>
@@ -35,7 +35,7 @@
                                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
                                 </div>
                                 <div class="col-md-12 text-center pt-5 ">
-                                    <button class="btn btn-primary btn-block" name="login"> Masuk </button>
+                                    <button type="submit" class="btn btn-primary btn-block" name="login"> Masuk </button>
                                 </div>
                             </form>
                         </div>

@@ -35,7 +35,7 @@ class Weekly extends CI_Controller
             'tagsign' => $queryVehicle->result(),
             'header' => 'Weekly Report',
             'hariini' => $hariini,
-            'tgl' => $batas,
+            'batas' => $batas,
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
         );
@@ -77,7 +77,7 @@ class Weekly extends CI_Controller
             'tagsign' => $queryVehicle->result(),
             'header' => 'Weekly Report',
             'hariini' => $hariini,
-            'tgl' => $batas,
+            'batas' => $batas,
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
         );
