@@ -1,2 +1,3 @@
 # logbook-vehicle
- lanjutan
+ login : username = admin
+									password = admin
