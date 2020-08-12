@@ -234,7 +234,7 @@
                             </div>
                             <div class="form-row  pull-right">
                                 <div class="form-group">
-                                    <button name="show" style="margin-right: 15px; margin-top:25px; padding:5px; padding-bottom:6px;" class="btn btn-success" type="submit">Show Data</button>
+                                    <button name="show" style="margin-right: 15px; margin-top:25px; padding:5px; padding-bottom:6px;" class="btn btn-primary" type="submit">Show Data</button>
                                 </div>
                             </div>
                         </form>

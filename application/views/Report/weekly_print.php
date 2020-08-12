@@ -109,7 +109,9 @@
         </table>
     </div>
 </div>
+<br>
 <!-- tabel summary availability plant -->
+<br>
 <div class="box">
     <div class="box-body table-responsive">
         <table class="table table-bordered text-center" border="1">
@@ -175,3 +177,11 @@
         </table>
     </div>
 </div>
+<?php
+if (@$print == 1) { ?>
+    <script>
+        window.print();
+    </script>
+<?php
+}
+?>

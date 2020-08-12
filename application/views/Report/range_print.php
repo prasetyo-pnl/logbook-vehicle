@@ -177,3 +177,11 @@
         </table>
     </div>
 </div>
+<?php
+if (@$print == 1) { ?>
+    <script>
+        window.print();
+    </script>
+<?php
+}
+?>

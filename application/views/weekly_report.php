@@ -167,9 +167,10 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    <small></small>
-                </h1>
+                <?php $x = 'x' ?>
+                <a href="<?= site_url('weekly/pdf/' . $hariini . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-danger" style="margin-right:25px;"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                <a href="<?= site_url('weekly/excel/' . $hariini . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-success" style="margin-right:25px;"><i class="fa fa-file-excel-o"></i> Excel</a>
+                <a href="<?= site_url('weekly/print/' . $hariini . 'x'  . $tagsort . 'x'  . $plantsort) ?>" target="_blank" class="btn btn-warning" style="margin-right:25px;"><i class="fa fa-print"></i> Print</a>
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                     <li><a href="<?= site_url('weekly'); ?>">Weekly</a></li>
@@ -234,7 +235,7 @@
                             </div>
                             <div class="form-row  pull-right">
                                 <div class="form-group">
-                                    <button name="show" style="margin-right: 15px; margin-top:25px; padding:5px; padding-bottom:6px;" class="btn btn-success" type="submit">Show Data</button>
+                                    <button name="show" style="margin-right: 15px; margin-top:25px; padding:5px; padding-bottom:6px;" class="btn btn-primary" type="submit">Show Data</button>
                                 </div>
                             </div>
                         </form>
