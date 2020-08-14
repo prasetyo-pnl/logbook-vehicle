@@ -184,16 +184,35 @@
 
                         <form id="form1" method="POST" action="<?= site_url('monthly/report') ?>" enctype="multipart/form-data">
                             <div class="form-row">
-                                <div class="col-md-3" style="margin-right: 50px;">
-                                    <label>Date</label>
-                                    <div class="input-group date">
-                                        <input value="<?= $bulanini ?>" type="text" class="form-control" name="date" id="datepicker" />
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                    </div>
+                                <div class="col-md-2" style="margin-right: 20px;">
+                                    <label>Year</label>
+                                    <select class="form-control" name="year">
+                                        <?php
+                                        $tahun = date('yy');
+                                        for ($i = 0; $i <= 10; $i++) {  ?>
+                                            <option value="<?= $tahun; ?>"><?= $tahun; ?></option>
+                                        <?php
+                                            $tahun--;
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                                <div class="col-md-3" style="margin-right: 50px;">
+                                <div class="col-md-2" style="margin-right: 20px;">
+                                    <label>Month</label>
+                                    <select class="form-control" name="month">
+                                        <?php
+                                        $today = date('m');
+                                        for ($i = 0; $i < 12; $i++) {
+                                            $number = date('m', strtotime('+' . $i . ' month', strtotime($today)));
+                                            $bulan = date('F', strtotime('+' . $i . ' month', strtotime($today)));
+                                        ?>
+                                            <option value="<?= $number ?>"><?= $bulan ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3" style="margin-right: 20px;">
                                     <label>Jenis Kendaraan</label>
                                     <select class="form-control" name="tagSort">
                                         <option value="all">- All -</option>
@@ -212,7 +231,7 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-md-3" style="margin-right: 50px;">
+                                <div class="col-md-3" style="margin-right: 20px;">
                                     <label>Plant</label>
                                     <select class="form-control" name="plantSort">
                                         <option value="all">- All -</option>

@@ -9,9 +9,12 @@ class Monthly extends CI_Controller
     }
     public function index()
     {
+        $queryVehicle = $this->report->getVehicle();
+        $queryPlant = $this->report->getPlant();
         $data = array(
             'header' => 'Monthly Report',
-            'bulanini' => '',
+            'plant' => $queryPlant->result(),
+            'tagsign' => $queryVehicle->result(),
         );
         $this->load->view('monthly_report', $data);
     }
