@@ -202,11 +202,18 @@
                                     <select class="form-control" name="month">
                                         <?php
                                         $today = date('m');
+                                        $cek = date('m', strtotime($bulan));
                                         for ($i = 0; $i < 12; $i++) {
                                             $number = date('m', strtotime('+' . $i . ' month', strtotime($today)));
-                                            $bulan = date('F', strtotime('+' . $i . ' month', strtotime($today)));
-                                        ?>
-                                            <option value="<?= $number ?>"><?= $bulan ?></option>
+                                            $months = date('F', strtotime('+' . $i . ' month', strtotime($today)));
+                                            if ($number == $bulan) { ?>
+                                                <option selected value="<?= $number ?>"><?= $months ?></option>
+                                            <?php
+                                            } else { ?>
+                                                <option value="<?= $number ?>"><?= $months ?></option>
+                                            <?php
+                                            }
+                                            ?>
                                         <?php
                                         }
                                         ?>
