@@ -51,7 +51,12 @@
             $total = 0;
             $hitung = 0;
             if ($range != null) {
-
+                $dateFinish = date('yy-m-d', strtotime($dateFinish));
+                $dateStart = date('yy-m-d', strtotime($dateStart));
+                $tgl1 = new DateTime($dateFinish);
+                $tgl2 = new DateTime($dateStart);
+                $oph = $tgl1->diff($tgl2)->days + 1;
+                $oph = $oph * 24;
 
                 foreach ($range as $r => $row) {
 
@@ -63,12 +68,12 @@
                             <td><?php echo $row->tagsign; ?></td>
                             <td><?php echo $row->type   ?></td>
                             <td><?php echo $row->kodebidang   ?></td>
-                            <td><?php echo 168; ?></td>
+                            <td><?php echo $oph ?></td>
                             <td><?php echo $row->shutdown ?></td>
                             <td><?php echo $row->troublefrec ?></td>
                             <td>
                                 <?php
-                                $availability = (((168 - $row->shutdown) / 168) * 100);
+                                $availability = ((($oph - $row->shutdown) / $oph) * 100);
                                 $total = $total + $availability;
                                 echo $availability = number_format($availability, 2) . " %";
                                 $hitung++;
@@ -121,8 +126,6 @@
                 <th>AVAILABILITY</th>
             </tr>
             <?php
-            $dateFinish = date('yy-m-d', strtotime($dateFinish));
-            $dateStart = date('yy-m-d', strtotime($dateStart));
             $total = 0;
             $hitungPlant = 0;
             foreach ($plant as $p => $row) {
@@ -149,7 +152,7 @@
                         $totalAvb = 0;
                         foreach ($query->result() as $q => $row) {
                             $shutdown = $row->shutdown;
-                            $avb = (((168 - $shutdown) / 168) * 100);
+                            $avb = ((($oph - $shutdown) / $oph) * 100);
                             $totalAvb = $totalAvb + $avb;
                             $hitung++;
                         }
