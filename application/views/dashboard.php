@@ -29,12 +29,14 @@
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="<?= site_url(); ?>" class="logo">
+			<a href="<?= site_url(); ?>" class="logo" style="background-color: #222D32;">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>VLS</b></span>
+				<span class="logo-mini"><img src="<?= base_url() ?>assets/dist/img/INALUMKECIL.png" width="20px" height="20px"></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>LogBook </b>System</span>
+				<span class="logo-lg"><img src="<?= base_url() ?>assets/dist/img/INALUM.png" width="200px" height="35px"></span>
+				<!-- <span class="logo-lg"><b>LogBook </b>System</span> -->
 			</a>
+
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
 				<!-- Sidebar toggle button-->
@@ -87,7 +89,7 @@
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
-				<div class="user-panel">
+				<!-- <div class="user-panel">
 					<div class="pull-left image">
 						<img src="<?= base_url() ?>assets/dist/img/admin.png" class="img-circle" alt="User Image">
 					</div>
@@ -95,7 +97,7 @@
 						<p>Admin</p>
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
-				</div>
+				</div> -->
 				<!-- search form -->
 				<form action="#" method="get" class="sidebar-form">
 					<div class="input-group">
@@ -151,7 +153,7 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Data Grafik Maintenance
+					<!-- Data Grafik Maintenance -->
 					<small></small>
 				</h1>
 				<ol class="breadcrumb">
@@ -163,103 +165,76 @@
 			<!-- Main content -->
 			<section class="content">
 
-				<!-- Default box -->
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">Title</h3>
-
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i></button>
-							<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-								<i class="fa fa-times"></i></button>
-						</div>
-					</div>
-					<div class="box-body">
-						Start creating your amazing application!
-					</div>
-					<!-- /.box-body -->
-					<div class="box-footer">
-						Footer
-					</div>
-					<!-- /.box-footer-->
-				</div>
-
-				<!-- /.box -->
-				<div class="row">
-					<div class="col-md-6">
-						<!-- LINE CHART -->
-						<div class="box box-info">
-							<div class="box-header with-border">
-								<h3 class="box-title">Line Chart</h3>
-
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="lineChart" style="height:250px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
-						</div>
-						<!-- /.box -->
-					</div>
-
-					<div class="col-md-6">
-						<!-- LINE CHART -->
-						<div class="box box-info">
-							<div class="box-header with-border">
-								<h3 class="box-title">Line Chart</h3>
-
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="lineChart" style="height:250px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
-						</div>
-						<!-- /.box -->
+				<div class="jumbotron-fluid" style="background-color: #222D32;">
+					<div class="text-justify" style="color: #B8C7CE;">
+						<h3 class="text-center" style="padding-top: 20px;"><strong>VEHICLE LOGBOOK SYSTEM</strong></h3>
+						<p style="padding: 0px 20px 20px;">A logbook (a ship's logs or simply log) is a record of important events in the management, operation, and navigation of a ship. It is essential to traditional navigation, and must be filled in at least daily.
+							The term originally referred to a book for recording readings from the chip log that was used to estimate a ship's speed through the water. Today's ship's log has grown to contain many other types of information, and is a record of operational data relating to a ship or submarine, such as weather conditions, times of routine events and significant incidents, crew complement or what ports were docked at and when.
+							The term logbook has spread to a wide variety of other usages. Today, a virtual or electronic logbook is typically used for record-keeping for complex machines such as nuclear plants or particle accelerators. In military terms, a logbook is a series of official and legally binding documents. Each document (usually arranged by date) is marked with the time of an event or action of significance.</p>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-3">
-
-					</div>
-					<div class="col-md-6">
-						<!-- LINE CHART -->
-						<div class="box box-info">
-							<div class="box-header with-border">
-								<h3 class="box-title">Line Chart</h3>
-
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
+				<!-- Small boxes (Stat box) -->
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-sm-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+								<h3><?php echo $totalUser->user; ?></h3>
+								<p>USER</p>
 							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="lineChart" style="height:250px"></canvas>
-								</div>
+							<div class="icon">
+								<i class="ion ion-person"></i>
 							</div>
-							<!-- /.box-body -->
+							<a href="<?= site_url('pengguna'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
-						<!-- /.box -->
 					</div>
-					<div class="col-md-3">
+					<!-- ./col -->
+					<div class="col-sm-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3><?php echo $totalPlant->plant ?></h3>
 
+								<p>PLANT</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-ios-people-outline"></i>
+							</div>
+							<a href="<?= site_url('plant'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-sm-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3><?php echo $totalVehicle->vehicle ?></h3>
+
+								<p>VEHICLE</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-android-car "></i>
+							</div>
+							<a href="<?= site_url('vehicle'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
 					</div>
 
+					<!-- ./col -->
+					<div class="col-sm-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-red">
+							<div class="inner">
+								<h3><?php echo $totalTrouble->trouble ?></h3>
+
+								<p>TROUBLE</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-wrench" aria-hidden="true"></i>
+							</div>
+							<a href="<?= site_url('trouble'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
 				</div>
 			</section>
 			<!-- /.content -->
@@ -268,7 +243,7 @@
 
 		<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.0
+				<b>Version</b> 1.1.0
 			</div>
 			<strong>Copyright &copy; 2020 <a href="https://inalum.id">PT.INDONESIA ASAHAN ALUMINIUM</a>.</strong> All rights
 			reserved.

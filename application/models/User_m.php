@@ -30,7 +30,7 @@ class User_m extends CI_Model
     {
         $param = array(
             'username' => $data['username'],
-            'password' => $data['password'],
+            'password' => SHA1($data['password']),
             'kodebidang' => $data['plant'],
         );
         $this->db->insert('tb_pengguna', $param);
@@ -39,7 +39,7 @@ class User_m extends CI_Model
     {
         $param = array(
             'username' => $data['username'],
-            'password' => $data['password'],
+            'password' => SHA1($data['password']),
             'kodebidang' => $data['plant'],
         );
         $this->db->set($param);

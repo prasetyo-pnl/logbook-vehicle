@@ -28,7 +28,6 @@ class Auth extends CI_Controller
                 );
                 $this->session->set_userdata($params);
                 echo "<script>
-                    alert('login berhasil');
                     window.location = '" . site_url('dashboard') . "';
                     </script>";
             } else {
