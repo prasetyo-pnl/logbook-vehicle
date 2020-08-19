@@ -160,8 +160,8 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <?php $x = 'x' ?>
-                <a href="<?= site_url('monthly/pdf/' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-danger" style="margin-right:25px;"><i class="fa fa-file-pdf-o"></i> PDF</a>
-                <a href="<?= site_url('monthly/excel/' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-success" style="margin-right:25px;"><i class="fa fa-file-excel-o"></i> Excel</a>
+                <a href="<?= site_url('monthly/pdf/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-danger" style="margin-right:25px;"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                <a href="<?= site_url('monthly/excel/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-success" style="margin-right:25px;"><i class="fa fa-file-excel-o"></i> Excel</a>
                 <a href="<?= site_url('monthly/print/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" target="_blank" class="btn btn-warning" style="margin-right:25px;"><i class="fa fa-print"></i> Print</a>
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>

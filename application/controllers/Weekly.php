@@ -243,6 +243,7 @@ class Weekly extends CI_Controller
         $object->getActiveSheet()->getStyle('A1:I' . $baris)->applyFromArray($thick);
 
         $baris += 4;
+        $borderAwal = $baris;
         $object->getActiveSheet()->setCellValueByColumnAndRow(0, $baris, "GRAND TOTAL AVAILABILITY");
         $object->getActiveSheet()->mergeCells('A' . $baris . ':C' . $baris);
         $object->getActiveSheet()->setCellValue('D' . $baris, "PLANT");
@@ -290,6 +291,12 @@ class Weekly extends CI_Controller
         $object->getActiveSheet()->mergeCells('A' . $baris . ':C' . $baris);
         $TAA = number_format($total / $hitungplant, 2);
         $object->getActiveSheet()->setCellValue('E' . $baris, $TAA . " %");
+
+        $thick = array();
+        $thick['borders'] = array();
+        $thick['borders']['allborders'] = array();
+        $thick['borders']['allborders']['style'] = PHPExcel_Style_Border::BORDER_THIN;
+        $object->getActiveSheet()->getStyle('A' . $borderAwal . ':E' . $baris)->applyFromArray($thick);
 
         $filename = "Weekly_Report_Excel" . '.xlsx';
         $object->getActiveSheet()->setTitle("Weekly Report Excel");
