@@ -21,8 +21,9 @@
                         <div class="myform form mt-5 ">
                             <div class="logo mb-3">
                                 <div class="col-md-12 text-center pb-1">
-                                    <h3>Logbook</h3>
-                                    <p>Vehicle Maintenance</p>
+                                    <!-- <h3>Logbook</h3>
+                                    <p>Vehicle Maintenance</p> -->
+                                    <img src="<?= base_url() ?>assets/dist/img/INALUM.png" width="200px" height="45px">
                                 </div>
                             </div>
                             <form action="<?= site_url('auth/proses') ?>" method="post">

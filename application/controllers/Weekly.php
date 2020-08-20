@@ -10,11 +10,7 @@ class Weekly extends CI_Controller
 
     public function index()
     {
-        // if (isset($_POST['show'])) {
-        //     $hariini = date('d-m-yy', strtotime($_POST['date']));
-        // } else {
-        //     $hariini = date('d-m-yy');
-        // }
+        check_not_login();
         $hariini = date('d-m-yy');
         $tagSort = 'all';
         $plantSort = 'all';

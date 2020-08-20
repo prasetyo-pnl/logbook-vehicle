@@ -54,7 +54,12 @@
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="<?= base_url() ?>assets/dist/img/admin.png" class="user-image" alt="User Image">
-								<span class="hidden-xs">Admin</span>
+								<span class="hidden-xs">
+									<?php
+									$username = $this->session->userdata('username');
+									echo $username;
+									?>
+								</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -72,7 +77,7 @@
 										<a href="#" class="btn btn-success btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-danger btn-flat ">Sign out</a>
+										<a href="<?= site_url('auth/logout') ?>" class="btn btn-danger btn-flat ">Sign out</a>
 									</div>
 								</li>
 							</ul>
@@ -121,7 +126,9 @@
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+							<?php if ($this->session->userdata('level') == 1) { ?>
+								<li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+							<?php } ?>
 							<li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
 							<li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
 							<li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
@@ -175,66 +182,116 @@
 				</div>
 				<!-- Small boxes (Stat box) -->
 				<div class="row" style="margin-top: 30px;">
-					<div class="col-sm-3 col-xs-6">
-						<!-- small box -->
-						<div class="small-box bg-aqua">
-							<div class="inner">
-								<h3><?php echo $totalUser->user; ?></h3>
-								<p>USER</p>
+					<?php if ($this->session->userdata('level') == 1) { ?>
+						<div class="col-sm-3 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-aqua">
+								<div class="inner">
+									<h3><?php echo $totalUser->user; ?></h3>
+									<p>USER</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-person"></i>
+								</div>
+								<a href="<?= site_url('pengguna'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
-							<div class="icon">
-								<i class="ion ion-person"></i>
-							</div>
-							<a href="<?= site_url('pengguna'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-sm-3 col-xs-6">
-						<!-- small box -->
-						<div class="small-box bg-yellow">
-							<div class="inner">
-								<h3><?php echo $totalPlant->plant ?></h3>
 
-								<p>PLANT</p>
+						<!-- ./col -->
+						<div class="col-sm-3 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-yellow">
+								<div class="inner">
+									<h3><?php echo $totalPlant->plant ?></h3>
+
+									<p>PLANT</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-ios-people-outline"></i>
+								</div>
+								<a href="<?= site_url('plant'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
-							<div class="icon">
-								<i class="ion ion-ios-people-outline"></i>
-							</div>
-							<a href="<?= site_url('plant'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-sm-3 col-xs-6">
-						<!-- small box -->
-						<div class="small-box bg-green">
-							<div class="inner">
-								<h3><?php echo $totalVehicle->vehicle ?></h3>
+						<!-- ./col -->
+						<div class="col-sm-3 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-green">
+								<div class="inner">
+									<h3><?php echo $totalVehicle->vehicle ?></h3>
 
-								<p>VEHICLE</p>
+									<p>VEHICLE</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-android-car "></i>
+								</div>
+								<a href="<?= site_url('vehicle'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
-							<div class="icon">
-								<i class="ion ion-android-car "></i>
-							</div>
-							<a href="<?= site_url('vehicle'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
-					</div>
 
-					<!-- ./col -->
-					<div class="col-sm-3 col-xs-6">
-						<!-- small box -->
-						<div class="small-box bg-red">
-							<div class="inner">
-								<h3><?php echo $totalTrouble->trouble ?></h3>
+						<!-- ./col -->
+						<div class="col-sm-3 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-red">
+								<div class="inner">
+									<h3><?php echo $totalTrouble->trouble ?></h3>
 
-								<p>TROUBLE</p>
+									<p>TROUBLE</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-wrench" aria-hidden="true"></i>
+								</div>
+								<a href="<?= site_url('trouble'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
-							<div class="icon">
-								<i class="fa fa-wrench" aria-hidden="true"></i>
-							</div>
-							<a href="<?= site_url('trouble'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
-					</div>
-					<!-- ./col -->
+						<!-- ./col -->
+					<?php } else { ?>
+						<div class="col-sm-4 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-yellow">
+								<div class="inner">
+									<h3><?php echo $totalPlant->plant ?></h3>
+
+									<p>PLANT</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-ios-people-outline"></i>
+								</div>
+								<a href="<?= site_url('plant'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+						<!-- ./col -->
+						<div class="col-sm-4 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-green">
+								<div class="inner">
+									<h3><?php echo $totalVehicle->vehicle ?></h3>
+
+									<p>VEHICLE</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-android-car "></i>
+								</div>
+								<a href="<?= site_url('vehicle'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+
+						<!-- ./col -->
+						<div class="col-sm-4 col-xs-6">
+							<!-- small box -->
+							<div class="small-box bg-red">
+								<div class="inner">
+									<h3><?php echo $totalTrouble->trouble ?></h3>
+
+									<p>TROUBLE</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-wrench" aria-hidden="true"></i>
+								</div>
+								<a href="<?= site_url('trouble'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					<?php
+					} ?>
 				</div>
 			</section>
 			<!-- /.content -->

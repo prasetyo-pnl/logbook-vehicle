@@ -58,7 +58,12 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?= base_url() ?>assets/dist/img/admin.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Admin</span>
+                                <span class="hidden-xs">
+                                    <?php
+                                    $username = $this->session->userdata('username');
+                                    echo $username;
+                                    ?>
+                                </span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -76,7 +81,7 @@
                                         <a href="#" class="btn btn-success btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-danger btn-flat ">Sign out</a>
+                                        <a href="<?= site_url('auth/logout') ?>" class="btn btn-danger btn-flat ">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -115,7 +120,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> User</a></li>
+                            <?php if ($this->session->userdata('level') == 1) { ?>
+                                <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+                            <?php } ?>
                             <li><a href="<?= site_url('plant'); ?>"><i class="fa fa-circle-o"></i> Plants</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>

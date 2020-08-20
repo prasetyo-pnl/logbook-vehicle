@@ -55,7 +55,12 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?= base_url() ?>assets/dist/img/admin.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Admin</span>
+                                <span class="hidden-xs">
+                                    <?php
+                                    $username = $this->session->userdata('username');
+                                    echo $username;
+                                    ?>
+                                </span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -73,7 +78,7 @@
                                         <a href="#" class="btn btn-success btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-danger btn-flat ">Sign out</a>
+                                        <a href="<?= site_url('auth/logout') ?>" class="btn btn-danger btn-flat ">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -112,8 +117,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i> User</a></li>
-                            <li class="active"><a href=""><i class="fa fa-circle-o"></i> Plant</a></li>
+                            <?php if ($this->session->userdata('level') == 1) { ?>
+                                <li><a href="<?= site_url('user'); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+                            <?php } ?>
+                            <li class="active"><a href="<?= site_url('plant') ?>"><i class="fa fa-circle-o"></i> Plant</a></li>
                             <li><a href="<?= site_url('vehicle'); ?>"><i class="fa fa-circle-o"></i> Vehicle</a></li>
                             <li><a href="<?= site_url('trouble'); ?>"><i class="fa fa-circle-o"></i> Trouble</a></li>
                         </ul>
@@ -156,11 +163,13 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Data Plant</h3>
-                        <div class="pull-right">
-                            <a href="<?= site_url('plant/add') ?>" class="btn btn-success">
-                                <i class="fa fa-plus"></i> Add
-                            </a>
-                        </div>
+                        <?php if ($this->session->userdata('level') == 1) { ?>
+                            <div class="pull-right">
+                                <a href="<?= site_url('plant/add') ?>" class="btn btn-success">
+                                    <i class="fa fa-plus"></i> Add
+                                </a>
+                            </div>
+                        <?php } ?>
                     </div>
 
                     <!-- Default box -->
@@ -173,7 +182,9 @@
                                         <th>No</th>
                                         <th>Plant Code</th>
                                         <th>Plant Name</th>
-                                        <th>Action</>
+                                        <?php if ($this->session->userdata('level') == 1) { ?>
+                                            <th>Action</>
+                                            <?php } ?>
                                     </tr>
                                 </thead>
                                 <?php
@@ -185,14 +196,16 @@
                                             <td><?= $no++ ?></td>
                                             <td><?= $row->kodebidang; ?></td>
                                             <td><?= $row->namabidang; ?></td>
-                                            <td class="text-center" width=" 160px">
-                                                <a href="<?= site_url('plant/edit/' . $row->kodebidang) ?>"" class=" btn btn-warning btn-xs">
-                                                    <i class="fa fa-pencil"></i> Edit
-                                                </a>
-                                                <a href="<?= site_url('plant/delete/' . $row->kodebidang) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </a>
-                                            </td>
+                                            <?php if ($this->session->userdata('level') == 1) { ?>
+                                                <td class="text-center" width=" 160px">
+                                                    <a href="<?= site_url('plant/edit/' . $row->kodebidang) ?>"" class=" btn btn-warning btn-xs">
+                                                        <i class="fa fa-pencil"></i> Edit
+                                                    </a>
+                                                    <a href="<?= site_url('plant/delete/' . $row->kodebidang) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
+                                                        <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                </td>
+                                            <?php } ?>
                                         </tr>
                                     </tbody>
                                 <?php

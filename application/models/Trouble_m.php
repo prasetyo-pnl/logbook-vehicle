@@ -1,13 +1,14 @@
 <?php
 class Trouble_m extends CI_Model
 {
-    public function get($id=null){
-        $this->db->select('*');
-        $this->db->from('tb_trouble');
+    public function get($id = null)
+    {
+
         if ($id != null) {
-            $this->db->where('id_trouble', $id);
+            $query = $this->db->query("SELECT id_trouble, tb_trouble.tagsign, dateentry, datefinish, stoptime, kindoftrouble,partofwork,description,countermeasure,sparepart,manpower,remarks, tb_vehicle.kodebidang FROM tb_trouble,tb_vehicle WHERE tb_trouble.tagsign = tb_vehicle.tagsign AND id_trouble = '$id'");
+        } else {
+            $query = $this->db->query("SELECT id_trouble, tb_trouble.tagsign, dateentry, datefinish, stoptime, kindoftrouble,partofwork,description,countermeasure,sparepart,manpower,remarks, tb_vehicle.kodebidang FROM tb_trouble,tb_vehicle WHERE tb_trouble.tagsign = tb_vehicle.tagsign");
         }
-        $query = $this->db->get();
         return $query;
     }
     function getVehicle()
@@ -16,7 +17,7 @@ class Trouble_m extends CI_Model
         return $query;
     }
 
-    function add($data,$tambahan)
+    function add($data, $tambahan)
     {
         $param = array(
             'tagsign' => $data['tagsign'],
@@ -33,7 +34,7 @@ class Trouble_m extends CI_Model
         );
         $this->db->insert('tb_trouble', $param);
     }
-    function edit($data,$tambahan)
+    function edit($data, $tambahan)
     {
         $param = array(
             'dateentry' => $tambahan['dateentry'],

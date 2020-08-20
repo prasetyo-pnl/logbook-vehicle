@@ -11,6 +11,7 @@ class Range extends CI_Controller
 
     public function index()
     {
+        check_not_login();
         $queryPlant = $this->report->getPlant();
         $queryVehicle = $this->report->getVehicle();
         $data = array(

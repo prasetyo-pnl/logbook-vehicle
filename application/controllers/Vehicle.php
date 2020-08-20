@@ -5,39 +5,42 @@ class Vehicle extends CI_Controller
 {
     function __construct()
     {
-        parent:: __construct();
-        $this->load->model('vehicle_m','vehicle');
+        parent::__construct();
+        $this->load->model('vehicle_m', 'vehicle');
     }
 
     public function index()
     {
-        
+        check_not_login();
         $query = $this->vehicle->get();
-        
+
         // $data['vehicle'] = $query->result();
         $data = array(
-            'header'=> 'Tampil Data Vehicle',
-            'vehicle'=> $query->result(),
-            
+            'header' => 'Tampil Data Vehicle',
+            'vehicle' => $query->result(),
+
         );
         $this->load->view('vehicle_tampil', $data);
     }
 
-    public function add(){
+    public function add()
+    {
         $query = $this->vehicle->getPlant();
         $data = array(
             'header' => 'Tambah Data Vehicle',
             'plant' => $query->result(),
         );
-        $this->load->view('vehicle_tambah', $data);  
+        $this->load->view('vehicle_tambah', $data);
     }
 
-    public function delete($id = null){
+    public function delete($id = null)
+    {
         $this->vehicle->delete($id);
         redirect('vehicle');
     }
 
-    public function edit($id = null){
+    public function edit($id = null)
+    {
         $query = $this->vehicle->get($id);
         $plant = $this->vehicle->getPlant();
         $data = array(
@@ -50,8 +53,9 @@ class Vehicle extends CI_Controller
         $this->load->view('vehicle_edit', $data);
     }
 
-    public function proses(){
-        
+    public function proses()
+    {
+
         $config['upload_path']   = './uploads/files';
         $config['allowed_types'] = 'jpg|png|jpeg';
         $config['max_size']      = 2048;
@@ -59,35 +63,32 @@ class Vehicle extends CI_Controller
         $this->load->library('upload', $config);
 
         if (isset($_POST['add'])) {
-            $inputan = $this->input->post(null,true);
+            $inputan = $this->input->post(null, true);
 
-            if(@$_FILES['foto']['name'] != null){
+            if (@$_FILES['foto']['name'] != null) {
                 if ($this->upload->do_upload('foto')) {
-                    $inputan['foto']= $this->upload->data('file_name');
+                    $inputan['foto'] = $this->upload->data('file_name');
                     $this->vehicle->add($inputan);
                     // if ($this->db->affected_rows() > 0) {
                     //     $this->session->set_flashdata('success', 'Data Berhasil disimpan');
                     // }
                     redirect('vehicle');
-                }else {
+                } else {
                     // $error = $this->upload->display_errors();
                     // $this->session->set_flashdata('error', $error);
                     redirect('vehicle/add');
                 }
-                
-            }else{
+            } else {
                 $inputan['foto'] = null;
                 $this->vehicle->add($inputan);
                 // if ($this->db->affected_rows() > 0) {
                 //     $this->session->set_flashdata('success', 'Data Berhasil disimpan');
                 // }
                 redirect('vehicle');
-
             }
-            
-        }elseif (isset($_POST['edit'])) {
+        } elseif (isset($_POST['edit'])) {
             $inputan = $this->input->post(null, true);
-            
+
             $config['upload_path']   = './uploads/files';
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['max_size']      = 2048;

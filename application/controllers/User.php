@@ -9,6 +9,7 @@ class User extends CI_Controller
 
     public function index()
     {
+        check_not_login();
         $query = $this->user->get();
         $data = array(
             'header' => 'Data User',

@@ -9,6 +9,7 @@ class Monthly extends CI_Controller
     }
     public function index()
     {
+        check_not_login();
         $tahun = date('yy');
         $bulan = date('m');
         $tagSort = 'all';

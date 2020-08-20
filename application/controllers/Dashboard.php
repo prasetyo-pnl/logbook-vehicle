@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
+		check_not_login();
 		$queryUser = $this->dashboard->getUser();
 		$queryVehicle = $this->dashboard->getVehicle();
 		$queryPlant = $this->dashboard->getPlant();
