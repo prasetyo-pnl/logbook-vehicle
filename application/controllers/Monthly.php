@@ -7,13 +7,18 @@ class Monthly extends CI_Controller
         parent::__construct();
         $this->load->model('report_m', 'report');
     }
-    public function index()
+    public function index($d = null)
     {
         check_not_login();
         $tahun = date('yy');
         $bulan = date('m');
         $tagSort = 'all';
-        $plantSort = 'all';
+        if ($this->session->userdata('kodebidang') != null) {
+            $plantSort = $this->session->userdata('kodebidang');
+        } else {
+            $plantSort = 'all';
+        }
+
         $filter = array(
             'tahun' => $tahun,
             'bulan' => $bulan,
@@ -24,6 +29,8 @@ class Monthly extends CI_Controller
         $queryVehicle = $this->report->getVehicle();
         $queryPlant = $this->report->getPlant();
         $queryTrouble = $this->report->getTrouble();
+
+        $toggle = @$d;
         $data = array(
             'monthly' => $query->result(),
             'header' => 'Monthly Report',
@@ -34,11 +41,12 @@ class Monthly extends CI_Controller
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
             'trouble' => $queryTrouble->result(),
+            'toggle' => $toggle,
         );
         $this->load->view('monthly_report', $data);
     }
 
-    public function report()
+    public function report($d = null)
     {
         if (isset($_POST['show'])) {
             $tahun = $_POST['year'];
@@ -70,6 +78,7 @@ class Monthly extends CI_Controller
         $query = $this->report->getMonth($filter);
         $queryPlant = $this->report->getPlant();
         $queryVehicle = $this->report->getVehicle();
+        $toggle = @$d;
         $data = array(
             'monthly' => $query->result(),
             'plant' => $queryPlant->result(),
@@ -79,6 +88,7 @@ class Monthly extends CI_Controller
             'bulan' => $bulan,
             'tagsort' => $tagSort,
             'plantsort' => $plantSort,
+            'toggle' => $toggle,
         );
         $this->load->view('monthly_report', $data);
     }

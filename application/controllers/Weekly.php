@@ -13,7 +13,11 @@ class Weekly extends CI_Controller
         check_not_login();
         $hariini = date('d-m-yy');
         $tagSort = 'all';
-        $plantSort = 'all';
+        if ($this->session->userdata('kodebidang') != null) {
+            $plantSort = $this->session->userdata('kodebidang');
+        } else {
+            $plantSort = 'all';
+        }
         $filter = array(
             'hariini' => $hariini,
             'tagsort' => $tagSort,

@@ -16,7 +16,7 @@ class User_m extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_pengguna');
         if ($id != null) {
-            $this->db->where('username', $id);
+            $this->db->where('id_user', $id);
         }
         $query = $this->db->get();
         return $query;
@@ -43,7 +43,7 @@ class User_m extends CI_Model
             'kodebidang' => $data['plant'],
         );
         $this->db->set($param);
-        $this->db->where('username', $data['id']);
+        $this->db->where('id_user', $data['id']);
         $this->db->update('tb_pengguna');
     }
     function delete($id)

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css">
     <!-- plugin datetimepicker -->
     <link rel="stylesheet" href="<?= base_url() ?>node_modules/jquery-datetimepicker/jquery.datetimepicker.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/grafik.css">
     <style>
         .line-title {
             border: 0;
@@ -166,10 +167,29 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                <?php
+                // $url = $_SERVER['REQUEST_URI'];
+                // echo $url;
+                if ($toggle == null or $toggle == 'O') {
+                    $toggle = 'I'; ?>
+                    <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
+                        <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px; margin-left:10px">
+                    </a>
+                <?php } elseif ($toggle == 'I') {
+                    $toggle = 'O'; ?>
+                    <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
+                        <input checked class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                    </a>
+                <?php } elseif ($toggle == 'O') {
+                    $toggle = 'I'; ?>
+                    <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                <?php } ?>
                 <?php $x = 'x' ?>
                 <a href="<?= site_url('monthly/pdf/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-danger" style="margin-right:25px;"><i class="fa fa-file-pdf-o"></i> PDF</a>
                 <a href="<?= site_url('monthly/excel/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-success" style="margin-right:25px;"><i class="fa fa-file-excel-o"></i> Excel</a>
                 <a href="<?= site_url('monthly/print/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" target="_blank" class="btn btn-warning" style="margin-right:25px;"><i class="fa fa-print"></i> Print</a>
+
+
                 <ol class="breadcrumb">
                     <li><a href="<?= site_url(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                     <li><a href="<?= site_url('monthly'); ?>">Monthly</a></li>
@@ -284,7 +304,12 @@
                     </div>
 
                     <!-- report -->
-                    <?php $this->load->view('report/monthly_print') ?>
+                    <?php if ($toggle == 'I') {
+                        $this->load->view('report/monthly_print');
+                    } elseif ($toggle == 'O') {
+                        $this->load->view('grafik/grafik_monthly');
+                    }
+                    ?>
 
 
                 </div>

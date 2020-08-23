@@ -176,7 +176,7 @@
                         <div class="box-body table-responsive">
 
                             <form id="form1" method="POST" action="<?= site_url('user/proses') ?>" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?= $user->username; ?>">
+                                <input type="hidden" name="id" value="<?= $user->id_user; ?>">
                                 <table class="table table-bordered table-striped justify-content-center">
                                     <div class="form-row" style="padding: 0px 90px 0px 90px;">
                                         <div class="form-group col-xs-4" style="padding-right: 50px;">
@@ -185,7 +185,10 @@
                                         </div>
                                         <div class="form-group col-xs-4" style="padding-left: 50px; padding-right: 50px;">
                                             <label>Password</label>
-                                            <input value="<?= $user->password; ?>" type="password" class="form-control" name="password" required />
+                                            <!-- <?php
+                                                    //$pass = array('password' => $user->password);
+                                                    ?> -->
+                                            <input value="<?$user->password; ?>" type="password" class="form-control" name="password" required />
                                         </div>
                                         <div class="form-group col-xs-4" style="padding-left: 50px;">
                                             <label>Plant</label>
