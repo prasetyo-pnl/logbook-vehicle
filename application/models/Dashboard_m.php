@@ -21,4 +21,15 @@ class Dashboard_m extends CI_Model
         $query = $this->db->query("SELECT COUNT(id_trouble) AS trouble FROM tb_trouble");
         return $query;
     }
+    function Jum_trouble()
+    {
+        //$hariini = year('yy-m-d', strtotime($filter['hariini']));
+        $this->db->group_by('month(dateentry)');
+        $this->db->where("year(dateentry)='2020'");
+        $this->db->select('month(dateentry) as bulan');
+        $this->db->select("COUNT(kindoftrouble) as total");
+        return $this->db->from('tb_trouble')
+            ->get()
+            ->result();
+    }
 }

@@ -21,7 +21,9 @@ class Dashboard extends CI_Controller
 			'totalVehicle' => $queryVehicle->row(),
 			'totalPlant' => $queryPlant->row(),
 			'totalTrouble' => $queryTrouble->row(),
+
 		);
+		$data['hasil'] = $this->dashboard->Jum_trouble();
 		$this->load->view('dashboard', $data);
 	}
 }

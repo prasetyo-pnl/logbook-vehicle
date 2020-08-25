@@ -171,7 +171,29 @@
 
 			<!-- Main content -->
 			<section class="content">
+				<div style="width: 800px;margin: 0px auto;">
+					<canvas id="myChart"></canvas>
+					<?php
+					//Inisialisasi nilai variabel awal
+					$nama_bulan = "";
+					$jumlah_data = null;
 
+					for ($x = 1; $x < 13; $x++) {
+						$nama_bulan = "'januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember' ";
+						foreach ($hasil as $item) {
+							$jur = $item->bulan;
+							$jum = $item->total;
+							if ($x == $jur) {
+								$j = $jum;
+								break;
+							} else {
+								$j = 0;
+							}
+						}
+						$jumlah_data .= "$j" . ", ";
+					}
+					?>
+				</div>
 				<div class="jumbotron-fluid" style="background-color: #222D32;">
 					<div class="text-justify" style="color: #B8C7CE;">
 						<h3 class="text-center" style="padding-top: 20px;"><strong>VEHICLE LOGBOOK SYSTEM</strong></h3>
@@ -327,7 +349,34 @@
 	<script src="<?= base_url() ?>assets/js/script.js"></script>
 	<!-- ChartJS -->
 	<script src="<?= base_url() ?>assets/bower_components/chart.js/Chart.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+			// The data for our dataset
+			data: {
+				labels: [<?php echo $nama_bulan; ?>],
+				datasets: [{
+					label: 'Troble',
+					backgroundColor: '#ADD8E6',
+					borderColor: '##93C3D2',
+					data: [<?php echo $jumlah_data; ?>]
+				}]
+			},
+			// Configuration options go here
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+	</script>
 </body>
 
 </html>
