@@ -167,22 +167,42 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-
                 <?php
-                if ($toggle == null or $toggle == 'O') {
-                    $toggle = 'I'; ?>
-                    <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
-                        <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px; margin-left:10px">
-                    </a>
-                <?php } elseif ($toggle == 'I') {
-                    $toggle = 'O'; ?>
-                    <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
-                        <input checked class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
-                    </a>
-                <?php } elseif ($toggle == 'O') {
-                    $toggle = 'I'; ?>
-                    <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
-                <?php } ?>
+                $url = $_SERVER['REQUEST_URI'];
+                if ($url == '/logbook/monthly' or $url == '/logbook/monthly/index/I/' or $url == '/logbook/monthly/index/O/') {
+
+                    if ($toggle == null or $toggle == 'O') {
+                        $toggle = 'I'; ?>
+                        <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
+                            <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px; margin-left:10px">
+                        </a>
+                    <?php } elseif ($toggle == 'I') {
+                        $toggle = 'O'; ?>
+                        <a href="<?= site_url('monthly/index/' . $toggle) ?>/">
+                            <input checked class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                        </a>
+                    <?php } elseif ($toggle == 'O') {
+                        $toggle = 'I'; ?>
+                        <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                    <?php }
+                } else {
+                    if ($toggle == null or $toggle == 'O') {
+                        $toggle = 'I'; ?>
+                        <a href="<?= site_url('monthly/report/' . $toggle . 'x' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>/">
+                            <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px; margin-left:10px">
+                        </a>
+                    <?php } elseif ($toggle == 'I') {
+                        $toggle = 'O'; ?>
+                        <a href="<?= site_url('monthly/report/' . $toggle . 'x' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>/">
+                            <input checked class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                        </a>
+                    <?php } elseif ($toggle == 'O') {
+                        $toggle = 'I'; ?>
+                        <input class="btn" type="checkbox" name="checkbox" id="checkbox" style="margin-right:25px;margin-left:10px">
+                <?php }
+                }
+                ?>
+
 
                 <?php $x = 'x' ?>
                 <a href="<?= site_url('monthly/pdf/' . $tahun . 'x' . $bulan . 'x'  . $tagsort . 'x'  . $plantsort) ?>" class="btn btn-danger" style="margin-right:25px;"><i class="fa fa-file-pdf-o"></i> PDF</a>
@@ -202,7 +222,16 @@
                 <div class="box">
                     <div class="box-header">
 
-                        <form id="form1" method="POST" action="<?= site_url('monthly/report') ?>" enctype="multipart/form-data">
+                        <form id="form1" method="POST" action="<?= site_url('monthly/report/') ?>" enctype="multipart/form-data">
+                            <?php if ($toggle == 'O') { ?>
+                                <input type="hidden" name="toggle" value="I">
+                            <?php
+                            } elseif ($toggle == 'I') { ?>
+                                <input type="hidden" name="toggle" value="O">
+                            <?php
+                            }
+                            ?>
+
                             <div class="form-row">
                                 <div class="col-md-2" style="margin-right: 20px;">
                                     <label>Year</label>

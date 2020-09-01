@@ -203,7 +203,7 @@
                                             }
                                             ?>
                                             <td class="text-center" width=" 160px">
-                                                <a href="<?= site_url('user/edit/' . $row->id_user) ?>"" class=" btn btn-warning btn-xs">
+                                                <a href="<?= site_url('user/edit/' . $row->id_user) ?>" class=" btn btn-warning btn-xs">
                                                     <i class="fa fa-pencil"></i> Edit
                                                 </a>
                                                 <a href="<?= site_url('user/delete/' . $row->id_user) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">

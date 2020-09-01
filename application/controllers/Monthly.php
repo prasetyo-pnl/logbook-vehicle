@@ -46,7 +46,7 @@ class Monthly extends CI_Controller
         $this->load->view('monthly_report', $data);
     }
 
-    public function report($d = null)
+    public function report($data = null)
     {
         if (isset($_POST['show'])) {
             $tahun = $_POST['year'];
@@ -68,6 +68,18 @@ class Monthly extends CI_Controller
             $tagSort = 'all';
             $plantSort = 'all';
         }
+
+        if ($data != null) {
+            $pisah = explode("x", $data);
+            $toggle = $pisah[0];
+            $tahun = $pisah[1];
+            $bulan = $pisah[2];
+            $tagSort = $pisah[3];
+            $plantSort = $pisah[4];
+        } else {
+            $toggle = $_POST['toggle'];
+        }
+
         $filter = array(
             'bulan' => $bulan,
             'tahun' => $tahun,
@@ -78,7 +90,9 @@ class Monthly extends CI_Controller
         $query = $this->report->getMonth($filter);
         $queryPlant = $this->report->getPlant();
         $queryVehicle = $this->report->getVehicle();
-        $toggle = @$d;
+
+
+
         $data = array(
             'monthly' => $query->result(),
             'plant' => $queryPlant->result(),

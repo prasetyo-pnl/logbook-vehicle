@@ -198,7 +198,7 @@
                                             <td><?= $row->namabidang; ?></td>
                                             <?php if ($this->session->userdata('level') == 1) { ?>
                                                 <td class="text-center" width=" 160px">
-                                                    <a href="<?= site_url('plant/edit/' . $row->kodebidang) ?>"" class=" btn btn-warning btn-xs">
+                                                    <a href="<?= site_url('plant/edit/' . $row->kodebidang) ?>" class=" btn btn-warning btn-xs">
                                                         <i class="fa fa-pencil"></i> Edit
                                                     </a>
                                                     <a href="<?= site_url('plant/delete/' . $row->kodebidang) ?>" onclick="return confirm('Yakin hapus data?')" class="btn btn-danger btn-xs">
